@@ -41,4 +41,29 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  ratings = rating_list.split(",")
+  ratings.each do |r|
+    r = r.strip
+	if uncheck == "un"
+	  uncheck("ratings_#{r}")
+	else
+	  check("ratings_#{r}")
+	end
+  end
+end
+
+# @goliver: si encuentro la manera, ¿las dos siguientes deberían ir juntas?
+Then /^I should see the following movies: (.*)/ do |films|
+  films_a = films.split( "," )
+  films_a.each do |film|
+    f = film.strip
+    step( "I should see #{f}" )
+  end
+end
+Then /^I should not see the following movies: (.*)/ do |films|
+  films_a = films.split( "," )
+  films_a.each do |film|
+    f = film.strip
+    step( "I should not see #{f}" )
+  end
 end

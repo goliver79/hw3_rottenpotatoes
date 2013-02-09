@@ -67,3 +67,27 @@ Then /^I should not see the following movies: (.*)/ do |films|
     step( "I should not see #{f}" )
   end
 end
+
+When /^I uncheck all ratings/ do
+   # pending # express the regexp above with the code you wish you had
+   ratings = Array.new
+   ratings.push( "R" );
+   ratings.push( "G" );
+   ratings.push( "PG" );
+   ratings.push( "PG-13" );
+   ratings.each do |r|
+	uncheck("ratings_#{r}")
+  end
+end
+
+When /^I check all ratings$/ do
+  # pending # express the regexp above with the code you wish you had
+  ratings = Array.new
+  ratings.push( "R" );
+  ratings.push( "G" );
+  ratings.push( "PG" );
+  ratings.push( "PG-13" );
+  ratings.each do |r|
+    check("ratings_#{r}")
+  end
+end

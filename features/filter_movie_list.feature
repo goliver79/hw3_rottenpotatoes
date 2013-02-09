@@ -35,7 +35,12 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   
 Scenario: no ratings selected
   # see assignment
-  
+  When I uncheck all ratings
+  And I press "Refresh"
+  Then I am on the RottenPotatoes home page
 
 Scenario: all ratings selected
   # see assignment
+  When I check all ratings
+  And I press "Refresh"
+  Then I am on the RottenPotatoes home page

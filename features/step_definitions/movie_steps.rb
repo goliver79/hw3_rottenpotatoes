@@ -37,7 +37,22 @@ end
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
 
-When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
+# When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
+  # # HINT: use String#split to split up the rating_list, then
+  # #   iterate over the ratings and reuse the "When I check..." or
+  # #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  # ratings = rating_list.split(",")
+  # ratings.each do |r|
+    # r = r.strip
+	# if uncheck == "un"
+	  # uncheck("ratings_#{r}")
+	# else
+	  # check("ratings_#{r}")
+	# end
+  # end
+# end
+
+Given /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
@@ -68,7 +83,35 @@ Then /^I should not see the following movies: (.*)/ do |films|
   end
 end
 
-When /^I uncheck all ratings/ do
+Then /^I should see all the movies/ do
+  assert(all("table#movies tr").count == Movie.all.count + 1) # tr pelis + tr header
+end
+
+# When /^I uncheck all ratings/ do
+   # # pending # express the regexp above with the code you wish you had
+   # ratings = Array.new
+   # ratings.push( "R" );
+   # ratings.push( "G" );
+   # ratings.push( "PG" );
+   # ratings.push( "PG-13" );
+   # ratings.each do |r|
+	# uncheck("ratings_#{r}")
+  # end
+# end
+
+# When /^I check all ratings$/ do
+  # # pending # express the regexp above with the code you wish you had
+  # ratings = Array.new
+  # ratings.push( "R" );
+  # ratings.push( "G" );
+  # ratings.push( "PG" );
+  # ratings.push( "PG-13" );
+  # ratings.each do |r|
+    # check("ratings_#{r}")
+  # end
+# end
+
+Given /^I uncheck all ratings/ do
    # pending # express the regexp above with the code you wish you had
    ratings = Array.new
    ratings.push( "R" );
@@ -80,7 +123,7 @@ When /^I uncheck all ratings/ do
   end
 end
 
-When /^I check all ratings$/ do
+Given /^I check all ratings$/ do
   # pending # express the regexp above with the code you wish you had
   ratings = Array.new
   ratings.push( "R" );
